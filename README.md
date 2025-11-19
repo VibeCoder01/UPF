@@ -32,7 +32,7 @@ A Next.js web application that analyzes food products from the UK market using t
 
 ```bash
 # Clone the repository
-git clone https://github.com/vibecoder01/upfanalyser.git
+git clone https://github.com/vibecoder01/upf.git
 cd upfanalyser
 
 # Install dependencies

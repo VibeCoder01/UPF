@@ -1,17 +1,30 @@
 # UPF Analyzer
 
-A Next.js web application that analyzes food products from the UK market using the NOVA classification system to identify Ultra-Processed Foods (UPF).
+A powerful Next.js web application that empowers users to make healthier food choices by analyzing products using the **NOVA classification system**. It identifies Ultra-Processed Foods (UPF) and suggests healthier alternatives.
 
 ## Features
 
-- 🔍 **3000+ UK Products** - Comprehensive database of UK food products from OpenFoodFacts
-- 🏷️ **NOVA Classification** - Visual indicators for all 4 NOVA groups (Unprocessed to Ultra-Processed)
-- 🔎 **Advanced Filtering** - Search by name/brand, filter by country and NOVA category
-- 📊 **Multi-Select NOVA Filter** - Checkbox selection to compare multiple processing levels
-- 🌍 **Country Information** - Displays country of origin for each product
-- 📱 **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
-- 🎨 **Premium UI** - Dark mode support with smooth animations
-- ⚡ **Optimized Performance** - ISR caching with 1-day revalidation
+### 🔍 Discovery & Analysis
+- **3000+ UK Products**: Comprehensive database sourced from OpenFoodFacts.
+- **NOVA Classification**: Clear visual indicators for all 4 NOVA groups (1: Unprocessed to 4: Ultra-Processed).
+- **Barcode Search**: Instantly find products by scanning or entering their barcode.
+- **Data Quality Indicators**: "Traffic light" style badges (A-D) showing the completeness of product data.
+
+### 🛒 Interactive Basket
+- **Basket Analysis**: Add items to a virtual basket to see the overall health score and UPF percentage.
+- **Health Score**: Real-time calculation of your basket's nutritional quality.
+- **Layout Options**: Toggle between a standard list view and an immersive full-width layout.
+
+### 💡 Smart Suggestions
+- **Better Choices**: Automatically suggests healthier alternatives (lower NOVA group, better Nutri-Score) for UPF items.
+- **Swap Hover**: Interactive hover cards showing details of suggested swaps.
+- **Explainability**: Detailed breakdown of *why* a product is classified as UPF (e.g., "Contains High Fructose Corn Syrup").
+
+### 📱 Modern Experience
+- **PWA Support**: Installable on mobile and desktop with offline capabilities.
+- **Responsive Design**: Optimized for all devices with a dedicated mobile filter drawer.
+- **Dark Mode**: Sleek, eye-friendly dark theme support.
+- **Performance**: Fast page loads using Next.js ISR (Incremental Static Regeneration).
 
 ## Tech Stack
 
@@ -19,13 +32,14 @@ A Next.js web application that analyzes food products from the UK market using t
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
-- **Data Source**: OpenFoodFacts API
+- **Data**: OpenFoodFacts API
+- **PWA**: Next.js PWA + Service Worker
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -33,7 +47,7 @@ A Next.js web application that analyzes food products from the UK market using t
 ```bash
 # Clone the repository
 git clone https://github.com/vibecoder01/upf.git
-cd upfanalyser
+cd upf
 
 # Install dependencies
 npm install
@@ -56,49 +70,14 @@ npm run start
 
 ## How It Works
 
-The app fetches product data from the OpenFoodFacts API, specifically filtering for UK products. Each product is classified using the NOVA system:
+The app fetches product data from the OpenFoodFacts API. Each product is analyzed and classified:
 
-- **NOVA 1** (Green) - Unprocessed or minimally processed foods
-- **NOVA 2** (Yellow) - Processed culinary ingredients
-- **NOVA 3** (Orange) - Processed foods
-- **NOVA 4** (Red) - Ultra-processed foods (UPF)
-
-## Features in Detail
-
-### Search & Filter
-- Real-time search across product names and brands
-- Country filter dropdown
-- Multi-select NOVA category checkboxes
-
-### Product Cards
-- Product image with fallback
-- Brand and product name
-- NOVA classification badge
-- Country of origin indicator
-- Expandable ingredient list
-
-### Information Sidebar
-- Explanation of UPF and NOVA system
-- Links to authoritative sources (FAO, OpenFoodFacts)
-- Educational content about food processing
-
-## Caching Strategy
-
-The app uses Incremental Static Regeneration (ISR) with a 1-day revalidation period to:
-- Minimize API calls to OpenFoodFacts
-- Ensure fast page loads
-- Reduce server load
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-MIT
+- **NOVA 1 (Green)**: Unprocessed or minimally processed foods (e.g., fruits, vegetables, milk).
+- **NOVA 2 (Yellow)**: Processed culinary ingredients (e.g., oils, butter, sugar).
+- **NOVA 3 (Orange)**: Processed foods (e.g., canned vegetables, fresh bread).
+- **NOVA 4 (Red)**: Ultra-processed foods (e.g., soft drinks, packaged snacks).
 
 ## Acknowledgments
 
-- Data provided by [OpenFoodFacts](https://world.openfoodfacts.org/)
-- NOVA classification system developed by researchers at the University of São Paulo
-- Built with [Next.js](https://nextjs.org/)
+- Data provided by [OpenFoodFacts](https://world.openfoodfacts.org/).
+- NOVA classification system developed by researchers at the University of São Paulo.

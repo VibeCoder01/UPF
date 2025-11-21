@@ -152,6 +152,33 @@ The app fetches product data from the OpenFoodFacts API. Each product is analyze
 - **NOVA 3 (Orange)**: Processed foods (e.g., canned vegetables, fresh bread).
 - **NOVA 4 (Red)**: Ultra-processed foods (e.g., soft drinks, packaged snacks).
 
+## Security & Reliability
+
+The application implements robust security practices and error handling:
+
+### 🔒 Security Features
+- **Input Validation**: Barcode search accepts only numeric input (max 13 digits)
+- **Data Validation**: localStorage data validated before use to prevent corrupted data crashes
+- **Type Safety**: Strict TypeScript types with union types for critical fields
+- **Image Security**: Remote images restricted to trusted OpenFoodFacts domain
+- **No Dependencies Vulnerabilities**: Zero npm security vulnerabilities
+- **XSS Protection**: React auto-escaping prevents cross-site scripting
+
+### 🛡️ Error Handling
+- **API Timeout Protection**: 60-second timeout with 3 retry attempts
+- **Graceful Degradation**: App loads even if API fails, showing helpful message
+- **Smart Retry Logic**: Exponential backoff for failed requests (2s, 4s, 6s delays)
+- **Service Worker Cache Cleanup**: Automatic removal of old caches on updates
+- **Comprehensive Logging**: Detailed error messages for debugging
+
+### ✅ Code Quality
+- **TypeScript Strict Mode**: Full type safety across the codebase
+- **Error Boundaries**: Proper try-catch blocks prevent crashes
+- **Performance Optimized**: Next.js Image component for automatic optimization
+- **PWA Best Practices**: Offline support with smart caching strategy
+
+
+
 ## Acknowledgments
 
 - Data provided by [OpenFoodFacts](https://world.openfoodfacts.org/).

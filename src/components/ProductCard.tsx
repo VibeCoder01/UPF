@@ -148,7 +148,13 @@ export function ProductCard({ product, allProducts }: ProductCardProps) {
                                     <div className="flex gap-2 items-center bg-white dark:bg-zinc-900 p-2 rounded border border-green-100 dark:border-green-900/30 cursor-help transition-colors hover:border-green-300 dark:hover:border-green-700">
                                         <div className="relative w-8 h-8 bg-zinc-100 dark:bg-zinc-800 rounded flex-shrink-0">
                                             {swap.image_url && (
-                                                <img src={swap.image_url} alt={swap.product_name} className="w-full h-full object-contain p-0.5" />
+                                                <Image
+                                                    src={swap.image_url}
+                                                    alt={swap.product_name}
+                                                    fill
+                                                    className="object-contain p-0.5"
+                                                    sizes="32px"
+                                                />
                                             )}
                                         </div>
                                         <div className="flex-1 min-w-0">
@@ -167,7 +173,13 @@ export function ProductCard({ product, allProducts }: ProductCardProps) {
                                     <div className="absolute bottom-full left-0 mb-2 w-64 bg-white dark:bg-zinc-900 p-4 rounded-xl shadow-xl border border-zinc-200 dark:border-zinc-800 hidden group-hover:block z-50 animate-in fade-in zoom-in-95 duration-200">
                                         <div className="relative h-32 w-full mb-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center">
                                             {swap.image_url ? (
-                                                <img src={swap.image_url} alt={swap.product_name} className="h-full object-contain p-2" />
+                                                <Image
+                                                    src={swap.image_url}
+                                                    alt={swap.product_name}
+                                                    fill
+                                                    className="object-contain p-2"
+                                                    sizes="256px"
+                                                />
                                             ) : (
                                                 <Info className="w-8 h-8 text-zinc-400" />
                                             )}

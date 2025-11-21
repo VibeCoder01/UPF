@@ -41,7 +41,18 @@ export function HomeClient({ products }: HomeClientProps) {
                         </p>
                     </div>
 
-                    <ProductGrid products={products} />
+                    {products.length > 0 ? (
+                        <ProductGrid products={products} />
+                    ) : (
+                        <div className="text-center py-20 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                            <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">No Products Available</h3>
+                            <p className="text-zinc-500 dark:text-zinc-400 mb-4">
+                                Unable to load products from OpenFoodFacts API.
+                                <br />
+                                Please try refreshing the page.
+                            </p>
+                        </div>
+                    )}
 
                     <div className="mt-20 text-center border-t border-zinc-200 dark:border-zinc-800 pt-10">
                         <p className="text-zinc-500 dark:text-zinc-500 text-sm flex items-center justify-center gap-2">

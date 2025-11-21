@@ -14,7 +14,19 @@ export default function BasketPage() {
     useEffect(() => {
         const saved = localStorage.getItem("upf-basket-layout-fullwidth");
         if (saved) {
-            setIsFullWidth(JSON.parse(saved));
+            try {
+                const parsed = JSON.parse(saved);
+                // Validate it's a boolean
+                if (typeof parsed === 'boolean') {
+                    setIsFullWidth(parsed);
+                } else {
+                    console.warn("Invalid basket layout preference, using default");
+                    localStorage.removeItem("upf-basket-layout-fullwidth");
+                }
+            } catch (e) {
+                console.error("Failed to parse basket layout preference", e);
+                localStorage.removeItem("upf-basket-layout-fullwidth");
+            }
         }
     }, []);
 

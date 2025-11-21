@@ -5,8 +5,8 @@ export interface Product {
     image_url: string;
     ingredients_text: string;
     categories_tags: string[];
-    nova_group: number; // 1-4
-    nutriscore_grade: 'a' | 'b' | 'c' | 'd' | 'e' | string;
+    nova_group: 1 | 2 | 3 | 4;
+    nutriscore_grade: 'a' | 'b' | 'c' | 'd' | 'e' | 'unknown';
     nutrient_levels: {
         fat: 'low' | 'moderate' | 'high' | string;
         salt: 'low' | 'moderate' | 'high' | string;
@@ -46,7 +46,7 @@ const DEFAULT_FIELDS = [
 
 export class OpenFoodFactsClient {
     private baseUrl = "https://world.openfoodfacts.org";
-    private timeout = 30000;
+    private timeout = 60000; // Increased to 60 seconds for slow API responses
     private maxRetries = 3;
 
     private async fetchWithRetry(url: string): Promise<Response> {
@@ -54,9 +54,10 @@ export class OpenFoodFactsClient {
         while (attempt < this.maxRetries) {
             try {
                 const controller = new AbortController();
-                const id = setTimeout(() => controller.abort(), this.timeout);
+                const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+
                 const response = await fetch(url, { signal: controller.signal });
-                clearTimeout(id);
+                clearTimeout(timeoutId);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -64,9 +65,27 @@ export class OpenFoodFactsClient {
                 return response;
             } catch (error) {
                 attempt++;
-                console.error(`Fetch attempt ${attempt} failed:`, error);
-                if (attempt === this.maxRetries) throw error;
-                await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+
+                // Better error logging
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                const isTimeout = error instanceof Error && error.name === 'AbortError';
+
+                console.error(
+                    `Fetch attempt ${attempt}/${this.maxRetries} failed:`,
+                    isTimeout ? 'Request timeout' : errorMessage
+                );
+
+                if (attempt === this.maxRetries) {
+                    throw new Error(
+                        isTimeout
+                            ? `Request timed out after ${this.timeout}ms (${this.maxRetries} attempts)`
+                            : errorMessage
+                    );
+                }
+
+                // Exponential backoff with longer delays for timeouts
+                const delay = isTimeout ? 2000 * attempt : 1000 * attempt;
+                await new Promise(resolve => setTimeout(resolve, delay));
             }
         }
         throw new Error("Max retries reached");

@@ -34,9 +34,23 @@ export function BasketProvider({ children }: { children: ReactNode }) {
         const savedBasket = localStorage.getItem('upf-basket');
         if (savedBasket) {
             try {
-                setBasketItems(JSON.parse(savedBasket));
+                const parsed = JSON.parse(savedBasket);
+                // Validate structure before using
+                if (Array.isArray(parsed) && parsed.every(item =>
+                    item &&
+                    typeof item.code === 'string' &&
+                    typeof item.product_name === 'string' &&
+                    typeof item.quantity === 'number' &&
+                    item.quantity > 0
+                )) {
+                    setBasketItems(parsed);
+                } else {
+                    console.warn("Invalid basket data structure, clearing localStorage");
+                    localStorage.removeItem('upf-basket');
+                }
             } catch (e) {
                 console.error("Failed to parse basket from localStorage", e);
+                localStorage.removeItem('upf-basket');
             }
         }
         setIsInitialized(true);

@@ -22,10 +22,17 @@ export function BarcodeSearch() {
             </div>
             <input
                 type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={13}
                 placeholder="Enter barcode..."
                 className="block w-full pl-9 pr-3 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg leading-5 bg-white dark:bg-zinc-900 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 text-sm transition duration-150 ease-in-out"
                 value={barcode}
-                onChange={(e) => setBarcode(e.target.value)}
+                onChange={(e) => {
+                    // Only allow numeric characters
+                    const value = e.target.value.replace(/\D/g, '');
+                    setBarcode(value);
+                }}
             />
         </form>
     );

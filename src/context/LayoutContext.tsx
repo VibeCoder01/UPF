@@ -15,7 +15,19 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const saved = localStorage.getItem("upf-layout-fullwidth");
         if (saved) {
-            setIsFullWidth(JSON.parse(saved));
+            try {
+                const parsed = JSON.parse(saved);
+                // Validate it's a boolean
+                if (typeof parsed === 'boolean') {
+                    setIsFullWidth(parsed);
+                } else {
+                    console.warn("Invalid layout preference, using default");
+                    localStorage.removeItem("upf-layout-fullwidth");
+                }
+            } catch (e) {
+                console.error("Failed to parse layout preference", e);
+                localStorage.removeItem("upf-layout-fullwidth");
+            }
         }
     }, []);
 

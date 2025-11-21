@@ -14,7 +14,19 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-    event.waitUntil(clients.claim());
+    event.waitUntil(
+        // Clean up old caches
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames
+                    .filter((name) => name !== CACHE_NAME)
+                    .map((name) => {
+                        console.log('Deleting old cache:', name);
+                        return caches.delete(name);
+                    })
+            );
+        }).then(() => clients.claim())
+    );
 });
 
 self.addEventListener('fetch', (event) => {

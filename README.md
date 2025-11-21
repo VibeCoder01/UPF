@@ -68,6 +68,26 @@ npm run build
 npm run start
 ```
 
+### Install as Mobile App (PWA)
+
+Once the app is deployed and running, you can install it on your mobile device:
+
+#### iOS (Safari)
+1. Open the app in Safari
+2. Tap the **Share** button (square with arrow pointing up)
+3. Scroll down and tap **"Add to Home Screen"**
+4. Tap **"Add"** to confirm
+5. The app icon will appear on your home screen
+
+#### Android (Chrome)
+1. Open the app in Chrome
+2. Tap the **menu** (three dots) in the top-right corner
+3. Tap **"Add to Home screen"** or **"Install app"**
+4. Tap **"Install"** to confirm
+5. The app will be added to your home screen and app drawer
+
+Once installed, the app works offline and provides a native app-like experience!
+
 ## How It Works
 
 The app fetches product data from the OpenFoodFacts API. Each product is analyzed and classified:

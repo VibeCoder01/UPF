@@ -68,23 +68,56 @@ npm run build
 npm run start
 ```
 
+### Deployment
+
+To make the app accessible on mobile devices, you need to deploy it:
+
+#### Option 1: Deploy to the Cloud
+Deploy to a hosting platform like Vercel, Netlify, or similar:
+
+```bash
+# Example: Deploy to Vercel
+npm install -g vercel
+vercel
+```
+
+Once deployed, you'll get a public URL (e.g., `https://your-app.vercel.app`) that you can access from any device.
+
+#### Option 2: Local Network Access (Development)
+To test on your mobile device while developing locally:
+
+1. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+2. Find your computer's local IP address:
+   - **Windows**: Run `ipconfig` and look for "IPv4 Address"
+   - **Mac/Linux**: Run `ifconfig` or `ip addr`
+
+3. On your mobile device (connected to the same WiFi network):
+   - Open your browser and navigate to `http://YOUR_IP_ADDRESS:3000`
+   - Example: `http://192.168.1.100:3000`
+
 ### Install as Mobile App (PWA)
 
-Once the app is deployed and running, you can install it on your mobile device:
+Once the app is accessible via a URL (either deployed or local network):
 
 #### iOS (Safari)
-1. Open the app in Safari
+1. Open the app URL in Safari
 2. Tap the **Share** button (square with arrow pointing up)
 3. Scroll down and tap **"Add to Home Screen"**
 4. Tap **"Add"** to confirm
 5. The app icon will appear on your home screen
 
 #### Android (Chrome)
-1. Open the app in Chrome
+1. Open the app URL in Chrome
 2. Tap the **menu** (three dots) in the top-right corner
 3. Tap **"Add to Home screen"** or **"Install app"**
 4. Tap **"Install"** to confirm
 5. The app will be added to your home screen and app drawer
+
+> **Note**: PWA installation requires HTTPS in production. Local development (localhost or local IP) works without HTTPS. For production deployment, platforms like Vercel automatically provide HTTPS.
 
 Once installed, the app works offline and provides a native app-like experience!
 

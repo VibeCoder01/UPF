@@ -119,7 +119,29 @@ Once the app is accessible via a URL (either deployed or local network):
 
 > **Note**: PWA installation requires HTTPS in production. Local development (localhost or local IP) works without HTTPS. For production deployment, platforms like Vercel automatically provide HTTPS.
 
-Once installed, the app works offline and provides a native app-like experience!
+
+### PWA Benefits: Offline & Native App Experience
+
+Once installed, the app provides powerful capabilities:
+
+#### 🔌 Offline Functionality
+The app uses a **Service Worker** to cache resources and enable offline access:
+- **First Visit**: When you first open the app, it downloads and caches essential files (HTML, CSS, JavaScript, icons)
+- **Subsequent Visits**: The app loads instantly from the cache, even without internet
+- **Smart Caching**: Product data you've viewed is cached, so you can browse previously seen products offline
+- **Network-First Strategy**: When online, the app fetches fresh data and updates the cache in the background
+- **Graceful Fallback**: If the network fails, the app serves cached content automatically
+
+#### 📱 Native App-Like Experience
+The installed PWA behaves like a native mobile app:
+- **Home Screen Icon**: Launches directly from your home screen, just like any other app
+- **Full-Screen Mode**: Runs without browser UI (no address bar or browser controls)
+- **Standalone Window**: Opens in its own window, separate from your browser
+- **Fast Loading**: Instant startup thanks to cached resources
+- **App Switcher**: Appears in your device's app switcher/multitasking view
+- **Push Notifications** (future): Can receive notifications even when the app is closed
+
+> **Technical Note**: The Service Worker (`/public/sw.js`) intercepts network requests and implements a network-first caching strategy. This means you always get fresh data when online, but can still access cached data when offline.
 
 ## How It Works
 
